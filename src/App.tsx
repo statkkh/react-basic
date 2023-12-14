@@ -1,25 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import TodoList from "./components/todoList";
 
 function App() {
+
+  const [content, setContent] = useState<string>('');
+
+  const [todoList, setTodoList] = useState<string[]>([]);
+
+  const addItem = () => {
+    setTodoList([...todoList, content]);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <input type="text" value={content} onChange={(event) => setContent(event.target.value)} />
+      <button onClick={addItem}>추가</button>
+
+      <TodoList todoList = {todoList}/>
+    </main>
   );
 }
 
